@@ -9,5 +9,10 @@
             Creates a business owned by user catering-admin.
         </comment>
     </changeSet>
-
+    <changeSet id="SCHEMA_02" author="cateringadmin">
+        <sqlFile path="db/changelog/sql/schema/admin.sql" splitStatements="false"/>
+        <comment>
+            Creates an admin owned by user catering-admin.
+        </comment>
+    </changeSet>
 </databaseChangeLog>
