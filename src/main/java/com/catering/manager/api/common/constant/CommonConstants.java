@@ -18,5 +18,5 @@ public class CommonConstants {
     public static final String ADD_EP = "add";
     public static final String FIND_ALL_EP = "findAll";
     public static final String FIND_ALL_BY_CRITERIA_EP = "findAllByCriteria";
-    public static final String UPDATE = "update";
+    public static final String UPDATE_EP = "update";
 }
