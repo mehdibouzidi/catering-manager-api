@@ -47,7 +47,8 @@ public class SubCategoryService implements ISubCategoryService {
 
     @Override
     public boolean deleteById(Integer id) {
-        return deleteById(id);
+        repository.deleteById(id);
+        return true;
     }
 
 

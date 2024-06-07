@@ -45,7 +45,8 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public boolean deleteById(Integer id) {
-        return deleteById(id);
+        repository.deleteById(id);
+        return true;
     }
 
     @Override

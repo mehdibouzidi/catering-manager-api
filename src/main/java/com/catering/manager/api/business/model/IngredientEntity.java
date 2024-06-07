@@ -7,14 +7,13 @@ import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
-@Table(schema = BusinessConstants.BUSINESS_SCH, name = BusinessConstants.SUB_CATEGORY_TABLE)
+@Table(schema = BusinessConstants.BUSINESS_SCH, name = BusinessConstants.INGREDIENT_TABLE)
 @XmlRootElement
 @Data
 @NoArgsConstructor
-public class SubCategoryEntity implements Serializable {
+public class IngredientEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -24,14 +23,8 @@ public class SubCategoryEntity implements Serializable {
 
     private String name;
 
-    @JoinColumn(name = "category_fk", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "sub_category_fk", referencedColumnName = "id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
-    private CategoryEntity category;
+    private SubCategoryEntity subCategory;
 
-    @OneToMany(
-            mappedBy = "subCategory",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<IngredientEntity> ingredients;
 }
