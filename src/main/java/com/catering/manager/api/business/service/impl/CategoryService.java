@@ -72,12 +72,16 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public CategoryPayload findById(Integer id) {
-        return mapper.entityToPayload(repository.findById(id).orElse(null));
+        return mapper.entityToPayload(getEntity(id));
+    }
+
+    public CategoryEntity getEntity(Integer id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override
     public CategoryPayload update(CategoryPayload payload) {
-        CategoryEntity entity = repository.findById(payload.getId()).orElse(null);
+        CategoryEntity entity = getEntity(payload.getId());
         if(entity!=null){
             entity.setName(payload.getName());
             return mapper.entityToPayload(repository.save(entity));
