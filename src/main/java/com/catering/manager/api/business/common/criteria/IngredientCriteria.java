@@ -10,4 +10,5 @@ public class IngredientCriteria extends PaginationCriteria {
     private Integer id;
     private String name;
     private Integer subCategoryId;
+    private Integer unityId;
 }

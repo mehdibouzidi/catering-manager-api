@@ -10,4 +10,5 @@ public class IngredientPayload {
     private Integer id;
     private String name;
     private SubCategoryPayload subCategory;
+    private UnitPayload unit;
 }

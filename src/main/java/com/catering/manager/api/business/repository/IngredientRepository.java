@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface IngredientRepository extends JpaRepository<IngredientEntity,Integer> {
 
-    @Query(value = "SELECT ingr from IngredientEntity ingr WHERE ingr.name LIKE %:name% OR ingr.subCategory.id=:subCategoryId")
+    @Query(value = "SELECT ingr from IngredientEntity ingr WHERE (ingr.name LIKE %:name% OR ingr.name IS NULL) AND " +
+            "(ingr.subCategory.id=:subCategoryId OR ingr.subCategory.id IS NULL)")
     Page<IngredientEntity> findAllByCriteria(@Param("name") String name, @Param("subCategoryId") Integer subCategoryId, Pageable pageable);
 }

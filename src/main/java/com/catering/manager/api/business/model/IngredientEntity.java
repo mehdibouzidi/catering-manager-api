@@ -27,4 +27,10 @@ public class IngredientEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private SubCategoryEntity subCategory;
 
+    @JoinColumn(name = "unit_fk", referencedColumnName = "id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private UnitEntity unit;
+
+
+
 }

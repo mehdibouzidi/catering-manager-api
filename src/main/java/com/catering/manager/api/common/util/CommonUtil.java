@@ -23,4 +23,11 @@ public class CommonUtil {
         if(doubleDiv - (double) numberOfPages > 0){numberOfPages+=1;}
         return numberOfPages;
     }
+
+    public static String cleanQueryConditions(String query){
+        if(query.substring(query.length()-4, query.length()).contains("AND")){
+            query=query.substring(0,query.length()-4);
+        }
+        return query;
+    }
 }
