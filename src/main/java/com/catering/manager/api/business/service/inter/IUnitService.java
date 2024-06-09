@@ -4,7 +4,6 @@ import com.catering.manager.api.business.common.criteria.UnitCriteria;
 import com.catering.manager.api.business.model.UnitEntity;
 import com.catering.manager.api.business.payload.UnitPayload;
 import com.catering.manager.api.business.payload.global.GlobalPayload;
-import com.catering.manager.api.business.payload.global.GlobalUnitPayload;
 
 public interface IUnitService {
 

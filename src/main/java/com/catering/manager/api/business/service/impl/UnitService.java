@@ -5,16 +5,12 @@ import com.catering.manager.api.business.common.mapper.UnitMapper;
 import com.catering.manager.api.business.model.UnitEntity;
 import com.catering.manager.api.business.payload.UnitPayload;
 import com.catering.manager.api.business.payload.global.GlobalPayload;
-import com.catering.manager.api.business.payload.global.GlobalUnitPayload;
 import com.catering.manager.api.business.repository.UnitRepository;
 import com.catering.manager.api.business.service.inter.IUnitService;
-import com.catering.manager.api.common.constant.CommonConstants;
-import com.catering.manager.api.common.criteria.PaginationCriteria;
 import com.catering.manager.api.common.util.CommonUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -60,11 +56,10 @@ public class UnitService implements IUnitService {
 
     @Override
     public GlobalPayload<UnitPayload> findAllByCriteria(UnitCriteria criteria) {
-        Map<String,String> columnsValues= new HashMap<>();
 
         Pageable paging = CommonUtil.pageableBuilder(criteria);
 
-        String queryStr = CommonUtil.selectCritQueryBuilder("UnitEntity",columnsValues,criteria);
+        String queryStr = CommonUtil.selectCritQueryBuilder("UnitEntity", criteria.toMap(), criteria);
         Query query = entityManager.createQuery(queryStr);
 
         List<UnitEntity> entityResultList = query.getResultList();

@@ -3,7 +3,7 @@ package com.catering.manager.api.business.controller;
 
 import com.catering.manager.api.business.common.criteria.UnitCriteria;
 import com.catering.manager.api.business.payload.UnitPayload;
-import com.catering.manager.api.business.payload.global.GlobalUnitPayload;
+import com.catering.manager.api.business.payload.global.GlobalPayload;
 import com.catering.manager.api.business.service.inter.IUnitService;
 import com.catering.manager.api.common.exception.CRUDException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 import static com.catering.manager.api.business.common.util.BusinessConstants.UNIT_CONTROLLER;
 import static com.catering.manager.api.common.constant.CommonConstants.*;
@@ -63,7 +61,7 @@ public class UnitController {
     }
 
     @PostMapping(path = FIND_ALL_BY_CRITERIA_EP, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GlobalUnitPayload> findAllByBlogPostId(
+    public ResponseEntity<GlobalPayload<UnitPayload>> findAllByBlogPostId(
             @RequestBody UnitCriteria criteria
 
     ) {
