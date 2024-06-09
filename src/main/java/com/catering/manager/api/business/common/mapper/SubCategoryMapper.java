@@ -13,10 +13,12 @@ import java.util.Objects;
 public class SubCategoryMapper {
 
     private CategoryRepository categoryRepository;
+    private CategoryMapper categoryMapper;
 
     @Autowired
-    public SubCategoryMapper(CategoryRepository categoryRepository) {
+    public SubCategoryMapper(CategoryRepository categoryRepository, CategoryMapper categoryMapper) {
         this.categoryRepository = categoryRepository;
+        this.categoryMapper = categoryMapper;
     }
 
 
@@ -24,7 +26,7 @@ public class SubCategoryMapper {
         SubCategoryEntity entity = new SubCategoryEntity();
         entity.setId(payload.getId());
         entity.setName(payload.getName());
-        entity.setCategory(categoryRepository.findById(payload.getCategoryID()).orElse(null));
+        entity.setCategory(categoryRepository.findById(payload.getCategory().getId()).orElse(null));
         return entity;
     }
 
@@ -33,7 +35,7 @@ public class SubCategoryMapper {
         if (Objects.nonNull(entity)) {
             payload.setId(entity.getId());
             payload.setName(entity.getName());
-            payload.setCategoryID(entity.getCategory().getId());
+            payload.setCategory(categoryMapper.entityToPayload(entity.getCategory()));
         }
 
         return payload;

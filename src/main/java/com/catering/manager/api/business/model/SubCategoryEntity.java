@@ -27,11 +27,4 @@ public class SubCategoryEntity implements Serializable {
     @JoinColumn(name = "category_fk", referencedColumnName = "id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private CategoryEntity category;
-
-    @OneToMany(
-            mappedBy = "subCategory",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<IngredientEntity> ingredients;
 }

@@ -11,6 +11,8 @@ import com.catering.manager.api.common.exception.CRUDException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class SubCategoryService implements ISubCategoryService {
 
@@ -65,8 +67,8 @@ public class SubCategoryService implements ISubCategoryService {
     public SubCategoryPayload update(SubCategoryPayload payload) {
         SubCategoryEntity entity = getEntity(payload.getId());
         if(entity!=null){
-            entity.setName(payload.getName());
-            entity.setCategory(categoryService.getEntity(payload.getCategoryID()));
+            entity.setName(Objects.nonNull(payload.getName()) ? payload.getName() : entity.getName());
+            entity.setCategory(categoryService.getEntity(payload.getCategory().getId()));
             return mapper.entityToPayload(repository.save(entity));
         }
         return null;

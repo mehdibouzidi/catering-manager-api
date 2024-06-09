@@ -5,15 +5,17 @@ import com.catering.manager.api.business.common.mapper.IngredientMapper;
 import com.catering.manager.api.business.common.util.BusinessError;
 import com.catering.manager.api.business.model.IngredientEntity;
 import com.catering.manager.api.business.payload.IngredientPayload;
+import com.catering.manager.api.business.payload.global.GlobalPayload;
 import com.catering.manager.api.business.repository.IngredientRepository;
 import com.catering.manager.api.business.service.inter.IIngredientService;
 import com.catering.manager.api.business.service.inter.ISubCategoryService;
-import com.catering.manager.api.common.constant.CommonConstants;
+import com.catering.manager.api.business.service.inter.IUnitService;
 import com.catering.manager.api.common.exception.CRUDException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import com.catering.manager.api.common.util.CommonUtil;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,11 +28,16 @@ public class IngredientService implements IIngredientService {
     private IngredientMapper mapper;
 
     private ISubCategoryService subCategoryService;
+    private IUnitService unitService;
 
-    public IngredientService(IngredientRepository repository, IngredientMapper mapper, ISubCategoryService subCategoryService) {
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public IngredientService(IngredientRepository repository, IngredientMapper mapper, ISubCategoryService subCategoryService, IUnitService unitService) {
         this.repository = repository;
         this.mapper = mapper;
         this.subCategoryService = subCategoryService;
+        this.unitService = unitService;
     }
 
     @Override
@@ -68,9 +75,10 @@ public class IngredientService implements IIngredientService {
     public IngredientPayload update(IngredientPayload payload) {
         IngredientEntity entity = getEntity(payload.getId());
         if(entity!=null){
-            entity.setName(payload.getName());
+            entity.setName(Objects.nonNull(payload.getName()) ? payload.getName() : entity.getName());
             try {
                 entity.setSubCategory(subCategoryService.getEntity(payload.getSubCategory().getId()));
+                entity.setUnit(unitService.getEntity(payload.getUnit().getId()));
                 return mapper.entityToPayload(repository.save(entity));
             }catch (Exception ex){
                 throw new CRUDException(BusinessError.NON_EXISTING_SUB_CATEGORY.getLibelle());
@@ -80,20 +88,16 @@ public class IngredientService implements IIngredientService {
     }
 
     @Override
-    public List<IngredientPayload> findAllByCriteria(IngredientCriteria criteria) {
-        Sort sort = Sort.by(Sort.Order.desc("name"));
-        String sortCriteria = criteria.getSort();
-        String sortColumnCriteria = criteria.getSortColumn();
-        if (!sortCriteria.isEmpty()) {
-            sort = Sort.by(
-                    sortCriteria.equals(CommonConstants.ASC) ? Sort.Order.asc(sortColumnCriteria) : Sort.Order.desc(sortColumnCriteria)
-            );
-        }
-        Pageable paging = PageRequest.of(criteria.getPages(), criteria.getSize(), sort);
-        Page<IngredientEntity> categoryPage =
-                repository.findAllByCriteria(criteria.getName(), criteria.getSubCategoryId(), paging);
-        List<IngredientPayload> result = mapper.entityListToPayload(categoryPage.getContent());
-        return result;
+    public GlobalPayload<IngredientPayload> findAllByCriteria(IngredientCriteria criteria) {
+
+        Pageable paging = CommonUtil.pageableBuilder(criteria);
+
+        String queryStr = CommonUtil.selectCritQueryBuilder("IngredientEntity", criteria.toMap(), criteria);
+        Query query = entityManager.createQuery(queryStr);
+
+        List<IngredientEntity> entityResultList = query.getResultList();
+
+        return CommonUtil.globalPayloadBuilder(criteria, paging, entityResultList, mapper);
     }
 
 }

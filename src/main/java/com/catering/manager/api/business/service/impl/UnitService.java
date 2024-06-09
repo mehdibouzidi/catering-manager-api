@@ -82,7 +82,8 @@ public class UnitService implements IUnitService {
     public UnitPayload update(UnitPayload payload) {
         UnitEntity entity = getEntity(payload.getId());
         if(entity!=null){
-            entity.setName(payload.getName());
+            entity.setName(Objects.nonNull(payload.getName()) ? payload.getName() : entity.getName());
+            entity.setCode(Objects.nonNull(payload.getCode()) ? payload.getCode() : entity.getCode());
             return mapper.entityToPayload(repository.save(entity));
         }
         return null;

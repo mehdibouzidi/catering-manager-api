@@ -5,6 +5,7 @@ import com.catering.manager.api.business.model.IngredientEntity;
 import com.catering.manager.api.business.model.SubCategoryEntity;
 import com.catering.manager.api.business.payload.CategoryPayload;
 import com.catering.manager.api.business.payload.IngredientPayload;
+import com.catering.manager.api.business.payload.global.GlobalPayload;
 
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface IIngredientService {
     IngredientEntity getEntity(Integer id);
     IngredientPayload update(IngredientPayload payload);
 
-    List<IngredientPayload> findAllByCriteria(IngredientCriteria criteria);
+    GlobalPayload<IngredientPayload> findAllByCriteria(IngredientCriteria criteria);
 }

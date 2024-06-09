@@ -11,12 +11,12 @@ import java.util.Objects;
 @Component
 public class CategoryMapper implements IMapper<CategoryPayload,CategoryEntity>{
 
-    private SubCategoryMapper subCategoryMapper;
+    /*private SubCategoryMapper subCategoryMapper;*/
 
-    @Autowired
+    /*@Autowired
     public CategoryMapper(SubCategoryMapper subCategoryMapper) {
         this.subCategoryMapper = subCategoryMapper;
-    }
+    }*/
 
     public CategoryEntity payloadToEntity(CategoryPayload payload){
         CategoryEntity entity = new CategoryEntity();
@@ -30,7 +30,7 @@ public class CategoryMapper implements IMapper<CategoryPayload,CategoryEntity>{
         if (Objects.nonNull(entity)) {
             payload.setId(entity.getId());
             payload.setName(entity.getName());
-            payload.setSubCategories(subCategoryMapper.entityListToPayload(entity.getSubCategories()));
+//            payload.setSubCategories(subCategoryMapper.entityListToPayload(entity.getSubCategories()));
         }
         return payload;
     }

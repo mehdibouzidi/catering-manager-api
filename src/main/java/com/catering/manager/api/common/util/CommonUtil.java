@@ -59,7 +59,7 @@ public class CommonUtil {
         return queryStr;
     }
 
-    public static <T,S> GlobalPayload<T> globalPayloadBuilder(UnitCriteria criteria, Pageable paging, List<S> entityResultList, IMapper<T,S> mapper) {
+    public static <T,S> GlobalPayload<T> globalPayloadBuilder(PaginationCriteria criteria, Pageable paging, List<S> entityResultList, IMapper<T,S> mapper) {
         GlobalPayload<T> globalPayload = new GlobalPayload();
 
         int totalNumberOfElements = entityResultList.size();

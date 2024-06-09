@@ -9,5 +9,5 @@ import lombok.Data;
 public class SubCategoryPayload {
     private Integer id;
     private String name;
-    private Integer categoryID;
+    private CategoryPayload category;
 }

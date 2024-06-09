@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CategoryService implements ICategoryService {
@@ -84,7 +85,7 @@ public class CategoryService implements ICategoryService {
     public CategoryPayload update(CategoryPayload payload) {
         CategoryEntity entity = getEntity(payload.getId());
         if(entity!=null){
-            entity.setName(payload.getName());
+            entity.setName(Objects.nonNull(payload.getName()) ? payload.getName() : entity.getName());
             return mapper.entityToPayload(repository.save(entity));
         }
         return null;
