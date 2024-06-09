@@ -4,10 +4,12 @@ import com.catering.manager.api.business.common.criteria.UnitCriteria;
 import com.catering.manager.api.business.common.mapper.UnitMapper;
 import com.catering.manager.api.business.model.UnitEntity;
 import com.catering.manager.api.business.payload.UnitPayload;
+import com.catering.manager.api.business.payload.global.GlobalPayload;
 import com.catering.manager.api.business.payload.global.GlobalUnitPayload;
 import com.catering.manager.api.business.repository.UnitRepository;
 import com.catering.manager.api.business.service.inter.IUnitService;
 import com.catering.manager.api.common.constant.CommonConstants;
+import com.catering.manager.api.common.criteria.PaginationCriteria;
 import com.catering.manager.api.common.util.CommonUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -17,9 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class UnitService implements IUnitService {
@@ -59,49 +59,19 @@ public class UnitService implements IUnitService {
     }
 
     @Override
-    public GlobalUnitPayload findAllByCriteria(UnitCriteria criteria) {
-        GlobalUnitPayload globalPayload = new GlobalUnitPayload();
+    public GlobalPayload<UnitPayload> findAllByCriteria(UnitCriteria criteria) {
+        Map<String,String> columnsValues= new HashMap<>();
 
-        Sort sort = Sort.by(Sort.Order.desc("name"));
-        String sortCriteria = criteria.getSort();
-        String sortColumnCriteria = criteria.getSortColumn();
-        if (!sortCriteria.isEmpty()) {
-            sort = Sort.by(
-                    sortCriteria.equals(CommonConstants.ASC) ? Sort.Order.asc(sortColumnCriteria) : Sort.Order.desc(sortColumnCriteria)
-            );
-        }
-        Pageable paging = PageRequest.of(criteria.getPages(), criteria.getSize(), sort);
+        Pageable paging = CommonUtil.pageableBuilder(criteria);
 
-        String queryStr = "SELECT un from UnitEntity un " +
-                ( Objects.nonNull(criteria.getName()) || Objects.nonNull(criteria.getCode()) ? " WHERE " : Strings.EMPTY )+
-                ( Objects.nonNull(criteria.getName()) ? " LOWER(un.name) LIKE '%"+ criteria.getName().toLowerCase() +"%' AND "  : Strings.EMPTY )+
-                ( Objects.nonNull(criteria.getCode()) ? " LOWER(un.code) LIKE '%"+ criteria.getCode().toLowerCase() +"%' "  : Strings.EMPTY );
-        queryStr = CommonUtil.cleanQueryConditions(queryStr);
-        //SORT
-        String orderBy = (Strings.isBlank(criteria.getSortColumn())) ? "id": criteria.getSortColumn();
-        String sortType = (Strings.isBlank(criteria.getSortColumn())) ? " ASC" : " "+criteria.getSort();
-        queryStr+=(" ORDER BY un."+ orderBy + sortType);
+        String queryStr = CommonUtil.selectCritQueryBuilder("UnitEntity",columnsValues,criteria);
         Query query = entityManager.createQuery(queryStr);
 
         List<UnitEntity> entityResultList = query.getResultList();
 
-        int totalNumberOfElements = entityResultList.size();
-        List<UnitPayload> result = Arrays.asList();
-        if(totalNumberOfElements>0){
-            final int start = (int)paging.getOffset();
-            final int end = Math.min((start + paging.getPageSize()), entityResultList.size());
-
-            Page<UnitEntity> bookEntityPage = new PageImpl<>(entityResultList.subList(start,end), paging,criteria.getSize());
-
-            result = mapper.entityListToPayload(bookEntityPage.getContent());
-        }
-
-        globalPayload.setUnits(result);
-        globalPayload.setTotalNumberOfElements(totalNumberOfElements);
-        globalPayload.setTotalNumberOfPages(CommonUtil.calculateNumberOfPages(totalNumberOfElements, criteria.getSize()));
-
-        return globalPayload;
+        return CommonUtil.globalPayloadBuilder(criteria, paging, entityResultList, mapper);
     }
+
 
 
     @Override

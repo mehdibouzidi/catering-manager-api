@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
-public class UnitMapper {
+public class UnitMapper implements IMapper<UnitPayload, UnitEntity> {
 
 
     public UnitEntity payloadToEntity(UnitPayload payload){
@@ -29,7 +29,7 @@ public class UnitMapper {
         }
         return payload;
     }
-
+    @Override
     public List<UnitPayload> entityListToPayload(List<UnitEntity> entities){
         return Objects.isNull(entities) ? null : entities.stream().map(this::entityToPayload).toList();
     }

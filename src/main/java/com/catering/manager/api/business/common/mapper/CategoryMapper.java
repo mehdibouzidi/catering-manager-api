@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
-public class CategoryMapper {
+public class CategoryMapper implements IMapper<CategoryPayload,CategoryEntity>{
 
     private SubCategoryMapper subCategoryMapper;
 
@@ -35,7 +35,9 @@ public class CategoryMapper {
         return payload;
     }
 
+    @Override
     public List<CategoryPayload> entityListToPayload(List<CategoryEntity> entities){
         return Objects.isNull(entities) ? null : entities.stream().map(this::entityToPayload).toList();
     }
+
 }
