@@ -1,18 +1,24 @@
 package com.catering.manager.api.business.service.impl;
 
+import com.catering.manager.api.business.common.criteria.SubCategoryCriteria;
 import com.catering.manager.api.business.common.mapper.SubCategoryMapper;
 import com.catering.manager.api.business.common.util.BusinessError;
 import com.catering.manager.api.business.model.SubCategoryEntity;
-import com.catering.manager.api.business.payload.IngredientPayload;
 import com.catering.manager.api.business.payload.SubCategoryPayload;
 import com.catering.manager.api.business.payload.global.GlobalPayload;
 import com.catering.manager.api.business.repository.SubCategoryRepository;
 import com.catering.manager.api.business.service.inter.ICategoryService;
 import com.catering.manager.api.business.service.inter.ISubCategoryService;
 import com.catering.manager.api.common.exception.CRUDException;
+import com.catering.manager.api.common.util.CommonUtil;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -22,6 +28,10 @@ public class SubCategoryService implements ISubCategoryService {
     private SubCategoryMapper mapper;
 
     private ICategoryService categoryService;
+
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     public SubCategoryService(SubCategoryRepository repository, SubCategoryMapper mapper, ICategoryService categoryService) {
@@ -81,5 +91,18 @@ public class SubCategoryService implements ISubCategoryService {
         GlobalPayload<SubCategoryPayload> globalPayload = new GlobalPayload<>();
         globalPayload.setElements(mapper.entityListToPayload(repository.findAll()));
         return globalPayload;
+    }
+
+    @Override
+    public GlobalPayload<SubCategoryPayload> findAllByCriteria(SubCategoryCriteria criteria) {
+
+        Pageable paging = CommonUtil.pageableBuilder(criteria);
+
+        String queryStr = CommonUtil.selectCritQueryBuilder("SubCategoryEntity", criteria.toMap(), criteria);
+        Query query = entityManager.createQuery(queryStr);
+
+        List<SubCategoryEntity> entityResultList = query.getResultList();
+
+        return CommonUtil.globalPayloadBuilder(criteria, paging, entityResultList, mapper);
     }
 }

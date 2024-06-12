@@ -49,7 +49,7 @@ public class CommonUtil {
                 if(!columnsValues.isEmpty()){
                     queryStr+=" WHERE ";
                     for (Map.Entry<String, String> entry : columnsValues.entrySet()) {
-                        queryStr+= " LOWER(en."+ entry.getKey()+ ") LIKE '%"+entry.getValue()+"%' AND ";
+                        queryStr+= " LOWER(CAST( en."+ entry.getKey()+ " as string )) LIKE '%"+entry.getValue().toLowerCase()+"%' AND ";
                     }
                     queryStr = CommonUtil.cleanQueryConditions(queryStr);
                 }

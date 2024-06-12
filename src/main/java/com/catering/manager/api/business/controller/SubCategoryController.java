@@ -1,6 +1,8 @@
 package com.catering.manager.api.business.controller;
 
 
+import com.catering.manager.api.business.common.criteria.IngredientCriteria;
+import com.catering.manager.api.business.common.criteria.SubCategoryCriteria;
 import com.catering.manager.api.business.payload.IngredientPayload;
 import com.catering.manager.api.business.payload.SubCategoryPayload;
 import com.catering.manager.api.business.payload.global.GlobalPayload;
@@ -68,4 +70,11 @@ public class SubCategoryController {
         }
     }
 
+    @PostMapping(path = FIND_ALL_BY_CRITERIA_EP, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<GlobalPayload<SubCategoryPayload>> findAllByBlogPostId(
+            @RequestBody SubCategoryCriteria criteria
+
+    ) {
+        return new ResponseEntity(service.findAllByCriteria(criteria), HttpStatus.OK);
+    }
 }

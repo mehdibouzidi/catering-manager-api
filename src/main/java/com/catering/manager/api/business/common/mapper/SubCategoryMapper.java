@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
-public class SubCategoryMapper {
+public class SubCategoryMapper implements IMapper<SubCategoryPayload, SubCategoryEntity>{
 
     private CategoryRepository categoryRepository;
     private CategoryMapper categoryMapper;
@@ -40,7 +40,7 @@ public class SubCategoryMapper {
 
         return payload;
     }
-
+    @Override
     public List<SubCategoryPayload> entityListToPayload(List<SubCategoryEntity> entities) {
         return Objects.isNull(entities) ? null : entities.stream().map(this::entityToPayload).toList();
     }

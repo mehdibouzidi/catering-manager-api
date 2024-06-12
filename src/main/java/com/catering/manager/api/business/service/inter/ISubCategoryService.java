@@ -1,5 +1,6 @@
 package com.catering.manager.api.business.service.inter;
 
+import com.catering.manager.api.business.common.criteria.SubCategoryCriteria;
 import com.catering.manager.api.business.model.SubCategoryEntity;
 import com.catering.manager.api.business.payload.SubCategoryPayload;
 import com.catering.manager.api.business.payload.global.GlobalPayload;
@@ -14,4 +15,6 @@ public interface ISubCategoryService {
     SubCategoryPayload update(SubCategoryPayload payload);
 
     GlobalPayload<SubCategoryPayload> findAll();
+
+    GlobalPayload<SubCategoryPayload> findAllByCriteria(SubCategoryCriteria criteria);
 }
