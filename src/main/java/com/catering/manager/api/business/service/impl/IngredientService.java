@@ -100,4 +100,11 @@ public class IngredientService implements IIngredientService {
         return CommonUtil.globalPayloadBuilder(criteria, paging, entityResultList, mapper);
     }
 
+    @Override
+    public GlobalPayload<IngredientPayload> findAll() {
+        GlobalPayload<IngredientPayload> globalPayload = new GlobalPayload<>();
+        globalPayload.setElements(mapper.entityListToPayload(repository.findAll()));
+        return globalPayload;
+    }
+
 }

@@ -2,6 +2,7 @@ package com.catering.manager.api.business.controller;
 
 
 import com.catering.manager.api.business.common.criteria.UnitCriteria;
+import com.catering.manager.api.business.payload.SubCategoryPayload;
 import com.catering.manager.api.business.payload.UnitPayload;
 import com.catering.manager.api.business.payload.global.GlobalPayload;
 import com.catering.manager.api.business.service.inter.IUnitService;
@@ -58,6 +59,11 @@ public class UnitController {
         } catch (CRUDException exception) {
             return new ResponseEntity(exception.getDescription(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping(path = FIND_ALL_EP, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<GlobalPayload<UnitPayload>> findAllByBlogPostId() {
+        return new ResponseEntity(service.findAll(), HttpStatus.OK);
     }
 
     @PostMapping(path = FIND_ALL_BY_CRITERIA_EP, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -1,9 +1,9 @@
 package com.catering.manager.api.business.controller;
 
 
-import com.catering.manager.api.business.common.criteria.CategoryCriteria;
-import com.catering.manager.api.business.payload.CategoryPayload;
+import com.catering.manager.api.business.payload.IngredientPayload;
 import com.catering.manager.api.business.payload.SubCategoryPayload;
+import com.catering.manager.api.business.payload.global.GlobalPayload;
 import com.catering.manager.api.business.service.inter.ISubCategoryService;
 import com.catering.manager.api.common.exception.CRUDException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 import static com.catering.manager.api.business.common.util.BusinessConstants.SUB_CATEGORY_CONTROLLER;
 import static com.catering.manager.api.common.constant.CommonConstants.*;
@@ -44,7 +42,7 @@ public class SubCategoryController {
     }
 
 
-    @DeleteMapping(value = "/{categoryID}")
+    @DeleteMapping(value = "/{subCategoryID}")
     public ResponseEntity<String> delete(
             @PathVariable Integer subCategoryID
     ) {
@@ -53,6 +51,10 @@ public class SubCategoryController {
         } catch (CRUDException exception) {
             return new ResponseEntity(exception.getDescription(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    @GetMapping(path = FIND_ALL_EP, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<GlobalPayload<SubCategoryPayload>> findAllByBlogPostId() {
+        return new ResponseEntity(service.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{subCategoryID}")

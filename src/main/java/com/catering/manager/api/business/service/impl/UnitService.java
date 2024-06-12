@@ -3,6 +3,7 @@ package com.catering.manager.api.business.service.impl;
 import com.catering.manager.api.business.common.criteria.UnitCriteria;
 import com.catering.manager.api.business.common.mapper.UnitMapper;
 import com.catering.manager.api.business.model.UnitEntity;
+import com.catering.manager.api.business.payload.SubCategoryPayload;
 import com.catering.manager.api.business.payload.UnitPayload;
 import com.catering.manager.api.business.payload.global.GlobalPayload;
 import com.catering.manager.api.business.repository.UnitRepository;
@@ -87,5 +88,12 @@ public class UnitService implements IUnitService {
             return mapper.entityToPayload(repository.save(entity));
         }
         return null;
+    }
+
+    @Override
+    public GlobalPayload<UnitPayload> findAll() {
+        GlobalPayload<UnitPayload> globalPayload = new GlobalPayload<>();
+        globalPayload.setElements(mapper.entityListToPayload(repository.findAll()));
+        return globalPayload;
     }
 }

@@ -14,4 +14,6 @@ public interface IUnitService {
     UnitPayload findById(Integer id);
     UnitEntity getEntity(Integer id);
     UnitPayload update(UnitPayload payload);
+
+    GlobalPayload<UnitPayload> findAll();
 }

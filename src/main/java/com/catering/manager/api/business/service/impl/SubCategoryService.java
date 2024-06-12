@@ -3,7 +3,9 @@ package com.catering.manager.api.business.service.impl;
 import com.catering.manager.api.business.common.mapper.SubCategoryMapper;
 import com.catering.manager.api.business.common.util.BusinessError;
 import com.catering.manager.api.business.model.SubCategoryEntity;
+import com.catering.manager.api.business.payload.IngredientPayload;
 import com.catering.manager.api.business.payload.SubCategoryPayload;
+import com.catering.manager.api.business.payload.global.GlobalPayload;
 import com.catering.manager.api.business.repository.SubCategoryRepository;
 import com.catering.manager.api.business.service.inter.ICategoryService;
 import com.catering.manager.api.business.service.inter.ISubCategoryService;
@@ -72,5 +74,12 @@ public class SubCategoryService implements ISubCategoryService {
             return mapper.entityToPayload(repository.save(entity));
         }
         return null;
+    }
+
+    @Override
+    public GlobalPayload<SubCategoryPayload> findAll() {
+        GlobalPayload<SubCategoryPayload> globalPayload = new GlobalPayload<>();
+        globalPayload.setElements(mapper.entityListToPayload(repository.findAll()));
+        return globalPayload;
     }
 }

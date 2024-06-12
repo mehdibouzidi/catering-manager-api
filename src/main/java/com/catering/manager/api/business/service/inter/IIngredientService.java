@@ -19,4 +19,6 @@ public interface IIngredientService {
     IngredientPayload update(IngredientPayload payload);
 
     GlobalPayload<IngredientPayload> findAllByCriteria(IngredientCriteria criteria);
+
+    GlobalPayload<IngredientPayload> findAll();
 }

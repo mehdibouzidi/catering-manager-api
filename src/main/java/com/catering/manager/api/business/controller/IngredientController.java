@@ -12,8 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 import static com.catering.manager.api.business.common.util.BusinessConstants.INGREDIENT_CONTROLLER;
 import static com.catering.manager.api.common.constant.CommonConstants.*;
 
@@ -64,6 +62,11 @@ public class IngredientController {
         } catch (CRUDException exception) {
             return new ResponseEntity(exception.getDescription(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping(path = FIND_ALL_EP, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<GlobalPayload<IngredientPayload>> findAllByBlogPostId() {
+        return new ResponseEntity(service.findAll(), HttpStatus.OK);
     }
 
     @PostMapping(path = FIND_ALL_BY_CRITERIA_EP, produces = MediaType.APPLICATION_JSON_VALUE)
