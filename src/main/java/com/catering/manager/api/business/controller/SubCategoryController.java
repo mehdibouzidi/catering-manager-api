@@ -1,9 +1,7 @@
 package com.catering.manager.api.business.controller;
 
 
-import com.catering.manager.api.business.common.criteria.IngredientCriteria;
 import com.catering.manager.api.business.common.criteria.SubCategoryCriteria;
-import com.catering.manager.api.business.payload.IngredientPayload;
 import com.catering.manager.api.business.payload.SubCategoryPayload;
 import com.catering.manager.api.business.payload.global.GlobalPayload;
 import com.catering.manager.api.business.service.inter.ISubCategoryService;

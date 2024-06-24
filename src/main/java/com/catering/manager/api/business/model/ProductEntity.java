@@ -9,11 +9,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 @Entity
-@Table(schema = BusinessConstants.BUSINESS_SCH, name = BusinessConstants.INGREDIENT_TABLE)
+@Table(schema = BusinessConstants.BUSINESS_SCH, name = BusinessConstants.PRODUCT_TABLE)
 @XmlRootElement
 @Data
 @NoArgsConstructor
-public class IngredientEntity implements Serializable {
+public class ProductEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

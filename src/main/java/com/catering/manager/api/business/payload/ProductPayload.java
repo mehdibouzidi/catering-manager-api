@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class IngredientPayload {
+public class ProductPayload {
     private Integer id;
     private String name;
     private SubCategoryPayload subCategory;

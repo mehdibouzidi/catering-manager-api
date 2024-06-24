@@ -7,11 +7,11 @@ public class BusinessConstants {
     public static final String CATEGORY_TABLE = "data_category";
     public static final String SUB_CATEGORY_TABLE = "data_sub_category";
     public static final String UNIT_TABLE = "data_unit";
-    public static final String INGREDIENT_TABLE = "data_ingredient";
+    public static final String PRODUCT_TABLE = "data_product";
 
     // REST Constants
     public static final String CATEGORY_CONTROLLER = "category";
     public static final String SUB_CATEGORY_CONTROLLER = "subcategory";
     public static final String UNIT_CONTROLLER = "unit";
-    public static final String INGREDIENT_CONTROLLER = "ingredient";
+    public static final String PRODUCT_CONTROLLER = "product";
 }

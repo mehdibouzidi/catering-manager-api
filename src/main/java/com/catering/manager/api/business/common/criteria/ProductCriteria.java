@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class IngredientCriteria extends PaginationCriteria {
+public class ProductCriteria extends PaginationCriteria {
     private Integer id;
     private String name;
     private Integer subCategoryId;
