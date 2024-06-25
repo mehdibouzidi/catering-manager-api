@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class ProductService implements com.catering.manager.api.business.service.inter.ProductService {
+public class IProductService implements com.catering.manager.api.business.service.inter.IProductService {
 
     private ProductRepository repository;
     private ProductMapper mapper;
@@ -32,7 +32,7 @@ public class ProductService implements com.catering.manager.api.business.service
     @PersistenceContext
     private EntityManager entityManager;
 
-    public ProductService(ProductRepository repository, ProductMapper mapper, ISubCategoryService subCategoryService, IUnitService unitService) {
+    public IProductService(ProductRepository repository, ProductMapper mapper, ISubCategoryService subCategoryService, IUnitService unitService) {
         this.repository = repository;
         this.mapper = mapper;
         this.subCategoryService = subCategoryService;

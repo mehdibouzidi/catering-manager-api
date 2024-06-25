@@ -5,7 +5,7 @@ import com.catering.manager.api.business.model.ProductEntity;
 import com.catering.manager.api.business.payload.ProductPayload;
 import com.catering.manager.api.business.payload.global.GlobalPayload;
 
-public interface ProductService {
+public interface IProductService {
 
     ProductPayload save(ProductPayload payload);
     boolean delete(ProductPayload payload);

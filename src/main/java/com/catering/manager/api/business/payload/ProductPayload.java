@@ -8,6 +8,7 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductPayload {
     private Integer id;
+    private String code;
     private String name;
     private SubCategoryPayload subCategory;
     private UnitPayload unit;

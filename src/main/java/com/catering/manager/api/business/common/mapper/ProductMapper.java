@@ -30,6 +30,7 @@ public class ProductMapper implements IMapper<ProductPayload, ProductEntity>{
     public ProductEntity payloadToEntity(ProductPayload payload) {
         ProductEntity entity = new ProductEntity();
         entity.setId(payload.getId());
+        entity.setCode(payload.getCode());
         entity.setName(payload.getName());
         entity.setSubCategory(subCategoryRepository.findById(payload.getSubCategory().getId()).orElse(null));
         entity.setUnit(unitRepository.findById(payload.getUnit().getId()).orElse(null));
@@ -40,6 +41,7 @@ public class ProductMapper implements IMapper<ProductPayload, ProductEntity>{
         ProductPayload payload = new ProductPayload();
         if (Objects.nonNull(entity)) {
             payload.setId(entity.getId());
+            payload.setCode(entity.getCode());
             payload.setName(entity.getName());
             payload.setSubCategory(subCategoryMapper.entityToPayload(entity.getSubCategory()));
             payload.setUnit(unitMapper.entityToPayload(entity.getUnit()));

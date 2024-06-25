@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum BusinessError {
     NON_EXISTING_CATEGORY("Non existing Category"),
-    NON_EXISTING_SUB_CATEGORY("Non existing SubCategory");
+    NON_EXISTING_SUB_CATEGORY("Non existing SubCategory"),
+    NON_EXISTING_PRODUCT("Non existing Product");
 
 
     private String libelle;

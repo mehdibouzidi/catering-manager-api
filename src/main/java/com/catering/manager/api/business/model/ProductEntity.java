@@ -21,6 +21,7 @@ public class ProductEntity implements Serializable {
     @Column(name = "id")
     private Integer id;
 
+    private String code;
     private String name;
 
     @JoinColumn(name = "sub_category_fk", referencedColumnName = "id", nullable = false)

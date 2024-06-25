@@ -10,12 +10,12 @@ import java.util.Objects;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProductCriteria extends PaginationCriteria {
+public class NomenclatureCriteria extends PaginationCriteria {
     private Integer id;
     private String code;
     private String name;
-    private Integer subCategoryId;
-    private Integer unitId;
+    private String productCode;
+    private String productName;
 
     public Map<String, String> toMap(){
         Map<String, String> columnsValues = new HashMap<>();
@@ -23,17 +23,16 @@ public class ProductCriteria extends PaginationCriteria {
             columnsValues.put("id",id.toString());
         }
         if(Objects.nonNull(code)){
-            columnsValues.put("code",code);
+            columnsValues.put("name",code);
         }
         if(Objects.nonNull(name)){
             columnsValues.put("name",name);
         }
-        if(Objects.nonNull(subCategoryId)){
-            columnsValues.put("subCategory.id",subCategoryId.toString());
+        if(Objects.nonNull(productCode)){
+            columnsValues.put("product.code",productCode);
         }
-
-        if(Objects.nonNull(unitId)){
-            columnsValues.put("unit.id", unitId.toString());
+        if(Objects.nonNull(productName)){
+            columnsValues.put("product.name",productName);
         }
         return columnsValues;
     }
