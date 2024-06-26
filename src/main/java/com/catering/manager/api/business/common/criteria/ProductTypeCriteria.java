@@ -10,11 +10,10 @@ import java.util.Objects;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CategoryCriteria  extends PaginationCriteria {
+public class ProductTypeCriteria extends PaginationCriteria {
     private Integer id;
     private String code;
     private String name;
-
 
     public Map<String, String> toMap(){
         Map<String, String> columnsValues = new HashMap<>();

@@ -11,8 +11,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UnitRepository extends JpaRepository<UnitEntity,Integer> {
-
-    @Query(value = "SELECT un from UnitEntity un WHERE (:name IS NOT NULL AND un.name LIKE %:name%) AND " +
-            "(:code IS NOT NULL AND un.code LIKE %:code%)")
-    Page<UnitEntity> findAllByCriteria(@Param("name") String name,@Param("code") String code, Pageable pageable);
 }

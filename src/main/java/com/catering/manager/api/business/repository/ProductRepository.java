@@ -9,7 +9,4 @@ import org.springframework.data.repository.query.Param;
 
 public interface ProductRepository extends JpaRepository<ProductEntity,Integer> {
 
-    @Query(value = "SELECT ingr from ProductEntity ingr WHERE (ingr.name LIKE %:name% OR ingr.name IS NULL) AND " +
-            "(ingr.subCategory.id=:subCategoryId OR ingr.subCategory.id IS NULL)")
-    Page<ProductEntity> findAllByCriteria(@Param("name") String name, @Param("subCategoryId") Integer subCategoryId, Pageable pageable);
 }

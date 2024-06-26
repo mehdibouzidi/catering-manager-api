@@ -10,7 +10,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CategoryRepository  extends JpaRepository<CategoryEntity,Integer> {
-
-    @Query(value = "SELECT cat from CategoryEntity cat WHERE cat.name LIKE %:name%")
-    Page<CategoryEntity> findAllByCriteria(@Param("name") String name, Pageable pageable);
 }
