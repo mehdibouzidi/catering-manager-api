@@ -33,6 +33,10 @@ public class ProductEntity implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private UnitEntity unit;
 
+    @JoinColumn(name = "type_fk", referencedColumnName = "id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ProductTypeEntity type;
+
 
 
 }

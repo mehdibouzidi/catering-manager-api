@@ -16,6 +16,7 @@ public class ProductCriteria extends PaginationCriteria {
     private String name;
     private Integer subCategoryId;
     private Integer unitId;
+    private Integer typeId;
 
     public Map<String, String> toMap(){
         Map<String, String> columnsValues = new HashMap<>();
@@ -34,6 +35,9 @@ public class ProductCriteria extends PaginationCriteria {
 
         if(Objects.nonNull(unitId)){
             columnsValues.put("unit.id", unitId.toString());
+        }
+        if(Objects.nonNull(typeId)){
+            columnsValues.put("type.id", typeId.toString());
         }
         return columnsValues;
     }

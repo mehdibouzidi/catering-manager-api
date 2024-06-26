@@ -12,4 +12,5 @@ public class ProductPayload {
     private String name;
     private SubCategoryPayload subCategory;
     private UnitPayload unit;
+    private ProductTypePayload type;
 }

@@ -2,6 +2,7 @@ package com.catering.manager.api.business.common.mapper;
 
 import com.catering.manager.api.business.model.ProductEntity;
 import com.catering.manager.api.business.payload.ProductPayload;
+import com.catering.manager.api.business.repository.ProductTypeRepository;
 import com.catering.manager.api.business.repository.SubCategoryRepository;
 import com.catering.manager.api.business.repository.UnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,19 @@ public class ProductMapper implements IMapper<ProductPayload, ProductEntity>{
 
     private SubCategoryRepository subCategoryRepository;
     private UnitRepository unitRepository;
+    private ProductTypeRepository typeRepository;
     private SubCategoryMapper subCategoryMapper;
     private UnitMapper unitMapper;
+    private ProductTypeMapper typeMapper;
 
     @Autowired
-    public ProductMapper(SubCategoryRepository subCategoryRepository, UnitRepository unitRepository, SubCategoryMapper subCategoryMapper, UnitMapper unitMapper) {
+    public ProductMapper(SubCategoryRepository subCategoryRepository, UnitRepository unitRepository, ProductTypeRepository typeRepository, SubCategoryMapper subCategoryMapper, UnitMapper unitMapper, ProductTypeMapper typeMapper) {
         this.subCategoryRepository = subCategoryRepository;
         this.unitRepository = unitRepository;
+        this.typeRepository = typeRepository;
         this.subCategoryMapper = subCategoryMapper;
         this.unitMapper = unitMapper;
+        this.typeMapper = typeMapper;
     }
 
 
@@ -34,6 +39,7 @@ public class ProductMapper implements IMapper<ProductPayload, ProductEntity>{
         entity.setName(payload.getName());
         entity.setSubCategory(subCategoryRepository.findById(payload.getSubCategory().getId()).orElse(null));
         entity.setUnit(unitRepository.findById(payload.getUnit().getId()).orElse(null));
+        entity.setType(typeRepository.findById(payload.getType().getId()).orElse(null));
         return entity;
     }
 
@@ -45,6 +51,7 @@ public class ProductMapper implements IMapper<ProductPayload, ProductEntity>{
             payload.setName(entity.getName());
             payload.setSubCategory(subCategoryMapper.entityToPayload(entity.getSubCategory()));
             payload.setUnit(unitMapper.entityToPayload(entity.getUnit()));
+            payload.setType(typeMapper.entityToPayload(entity.getType()));
         }
 
         return payload;
