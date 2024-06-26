@@ -22,6 +22,7 @@ public class SubCategoryEntity implements Serializable {
     @Column(name = "id")
     private Integer id;
 
+    @Column(unique=true)
     private String code;
     private String name;
 
