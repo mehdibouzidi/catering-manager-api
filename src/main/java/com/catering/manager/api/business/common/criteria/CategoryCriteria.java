@@ -8,5 +8,6 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CategoryCriteria  extends PaginationCriteria {
     private Integer id;
+    private String code;
     private String name;
 }

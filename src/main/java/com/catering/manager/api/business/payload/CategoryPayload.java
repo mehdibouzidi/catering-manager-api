@@ -10,6 +10,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CategoryPayload {
     private Integer id;
+    private String code;
     private String name;
     private List<SubCategoryPayload> subCategories;
 }

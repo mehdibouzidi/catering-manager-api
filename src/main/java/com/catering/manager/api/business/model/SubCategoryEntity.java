@@ -22,6 +22,7 @@ public class SubCategoryEntity implements Serializable {
     @Column(name = "id")
     private Integer id;
 
+    private String code;
     private String name;
 
     @JoinColumn(name = "category_fk", referencedColumnName = "id", nullable = false)

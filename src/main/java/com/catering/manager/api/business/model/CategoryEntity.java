@@ -22,6 +22,7 @@ public class CategoryEntity  implements Serializable {
     @Column(name = "id")
     private Integer id;
 
+    private String code;
     private String name;
 
     @OneToMany(

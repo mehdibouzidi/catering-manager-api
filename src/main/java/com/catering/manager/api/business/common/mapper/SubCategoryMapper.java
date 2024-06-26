@@ -25,6 +25,7 @@ public class SubCategoryMapper implements IMapper<SubCategoryPayload, SubCategor
     public SubCategoryEntity payloadToEntity(SubCategoryPayload payload) {
         SubCategoryEntity entity = new SubCategoryEntity();
         entity.setId(payload.getId());
+        entity.setCode(payload.getCode());
         entity.setName(payload.getName());
         entity.setCategory(categoryRepository.findById(payload.getCategory().getId()).orElse(null));
         return entity;
@@ -34,6 +35,7 @@ public class SubCategoryMapper implements IMapper<SubCategoryPayload, SubCategor
         SubCategoryPayload payload = new SubCategoryPayload();
         if (Objects.nonNull(entity)) {
             payload.setId(entity.getId());
+            payload.setCode(entity.getCode());
             payload.setName(entity.getName());
             payload.setCategory(categoryMapper.entityToPayload(entity.getCategory()));
         }

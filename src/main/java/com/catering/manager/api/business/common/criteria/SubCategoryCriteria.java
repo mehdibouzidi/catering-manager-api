@@ -12,8 +12,10 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SubCategoryCriteria extends PaginationCriteria {
     private Integer id;
+    private String code;
     private String name;
     private Integer categoryId;
+    private String categoryCode;
     private String categoryName;
 
     public Map<String, String> toMap(){
@@ -21,11 +23,17 @@ public class SubCategoryCriteria extends PaginationCriteria {
         if(Objects.nonNull(id)){
             columnsValues.put("id",id.toString());
         }
+        if(Objects.nonNull(code)){
+            columnsValues.put("code",code);
+        }
         if(Objects.nonNull(name)){
             columnsValues.put("name",name);
         }
         if(Objects.nonNull(categoryId)){
             columnsValues.put("category.id",categoryId.toString());
+        }
+        if(Objects.nonNull(categoryCode)){
+            columnsValues.put("category.code", categoryCode);
         }
 
         if(Objects.nonNull(categoryName)){

@@ -21,6 +21,7 @@ public class CategoryMapper implements IMapper<CategoryPayload,CategoryEntity>{
     public CategoryEntity payloadToEntity(CategoryPayload payload){
         CategoryEntity entity = new CategoryEntity();
         entity.setId(payload.getId());
+        entity.setCode(payload.getCode());
         entity.setName(payload.getName());
         return entity;
     }
@@ -29,6 +30,7 @@ public class CategoryMapper implements IMapper<CategoryPayload,CategoryEntity>{
         CategoryPayload payload = new CategoryPayload();
         if (Objects.nonNull(entity)) {
             payload.setId(entity.getId());
+            payload.setCode(entity.getCode());
             payload.setName(entity.getName());
 //            payload.setSubCategories(subCategoryMapper.entityListToPayload(entity.getSubCategories()));
         }
