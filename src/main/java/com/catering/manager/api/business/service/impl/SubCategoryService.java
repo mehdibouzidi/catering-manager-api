@@ -87,10 +87,8 @@ public class SubCategoryService implements ISubCategoryService {
     }
 
     @Override
-    public GlobalPayload<SubCategoryPayload> findAll() {
-        GlobalPayload<SubCategoryPayload> globalPayload = new GlobalPayload<>();
-        globalPayload.setElements(mapper.entityListToPayload(repository.findAll()));
-        return globalPayload;
+    public List<SubCategoryPayload> findAll() {
+        return mapper.entityListToPayload(repository.findAll());
     }
 
     @Override

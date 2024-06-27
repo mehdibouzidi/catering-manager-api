@@ -5,6 +5,8 @@ import com.catering.manager.api.business.model.UnitEntity;
 import com.catering.manager.api.business.payload.UnitPayload;
 import com.catering.manager.api.business.payload.global.GlobalPayload;
 
+import java.util.List;
+
 public interface IUnitService {
 
     UnitPayload save(UnitPayload payload);
@@ -15,5 +17,5 @@ public interface IUnitService {
     UnitEntity getEntity(Integer id);
     UnitPayload update(UnitPayload payload);
 
-    GlobalPayload<UnitPayload> findAll();
+    List<UnitPayload> findAll();
 }

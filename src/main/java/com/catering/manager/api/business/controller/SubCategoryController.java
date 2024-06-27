@@ -12,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.catering.manager.api.business.common.util.BusinessConstants.SUB_CATEGORY_CONTROLLER;
 import static com.catering.manager.api.common.constant.CommonConstants.*;
 
@@ -53,7 +55,7 @@ public class SubCategoryController {
         }
     }
     @GetMapping(path = FIND_ALL_EP, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GlobalPayload<SubCategoryPayload>> findAllByBlogPostId() {
+    public ResponseEntity<List<SubCategoryPayload>> findAllByBlogPostId() {
         return new ResponseEntity(service.findAll(), HttpStatus.OK);
     }
 

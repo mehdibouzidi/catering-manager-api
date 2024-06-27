@@ -92,10 +92,8 @@ public class NomenclatureService implements INomeclatureService {
     }
 
     @Override
-    public GlobalPayload<NomenclaturePayload> findAll() {
-        GlobalPayload<NomenclaturePayload> globalPayload = new GlobalPayload<>();
-        globalPayload.setElements(mapper.entityListToPayload(repository.findAll()));
-        return globalPayload;
+    public List<NomenclaturePayload> findAll() {
+        return mapper.entityListToPayload(repository.findAll());
     }
 
 }

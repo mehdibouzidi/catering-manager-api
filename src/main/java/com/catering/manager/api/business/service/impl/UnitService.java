@@ -91,9 +91,7 @@ public class UnitService implements IUnitService {
     }
 
     @Override
-    public GlobalPayload<UnitPayload> findAll() {
-        GlobalPayload<UnitPayload> globalPayload = new GlobalPayload<>();
-        globalPayload.setElements(mapper.entityListToPayload(repository.findAll()));
-        return globalPayload;
+    public List<UnitPayload> findAll() {
+        return mapper.entityListToPayload(repository.findAll());
     }
 }

@@ -12,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static com.catering.manager.api.business.common.util.BusinessConstants.NOMENCLATURE_CONTROLLER;
 import static com.catering.manager.api.common.constant.CommonConstants.*;
 
@@ -65,7 +67,7 @@ public class NomenclatureController {
     }
 
     @GetMapping(path = FIND_ALL_EP, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GlobalPayload<NomenclaturePayload>> findAllByBlogPostId() {
+    public ResponseEntity<List<NomenclaturePayload>> findAllByBlogPostId() {
         return new ResponseEntity(service.findAll(), HttpStatus.OK);
     }
 

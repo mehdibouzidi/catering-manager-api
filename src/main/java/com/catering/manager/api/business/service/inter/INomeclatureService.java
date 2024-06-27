@@ -5,6 +5,8 @@ import com.catering.manager.api.business.model.NomenclatureEntity;
 import com.catering.manager.api.business.payload.NomenclaturePayload;
 import com.catering.manager.api.business.payload.global.GlobalPayload;
 
+import java.util.List;
+
 public interface INomeclatureService {
 
     NomenclaturePayload save(NomenclaturePayload payload);
@@ -16,5 +18,5 @@ public interface INomeclatureService {
 
     GlobalPayload<NomenclaturePayload> findAllByCriteria(NomenclatureCriteria criteria);
 
-    GlobalPayload<NomenclaturePayload> findAll();
+    List<NomenclaturePayload> findAll();
 }

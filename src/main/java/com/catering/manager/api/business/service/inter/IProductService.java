@@ -5,6 +5,8 @@ import com.catering.manager.api.business.model.ProductEntity;
 import com.catering.manager.api.business.payload.ProductPayload;
 import com.catering.manager.api.business.payload.global.GlobalPayload;
 
+import java.util.List;
+
 public interface IProductService {
 
     ProductPayload save(ProductPayload payload);
@@ -16,5 +18,5 @@ public interface IProductService {
 
     GlobalPayload<ProductPayload> findAllByCriteria(ProductCriteria criteria);
 
-    GlobalPayload<ProductPayload> findAll();
+    List<ProductPayload> findAll();
 }

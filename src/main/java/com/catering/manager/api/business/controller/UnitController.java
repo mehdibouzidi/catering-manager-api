@@ -2,7 +2,6 @@ package com.catering.manager.api.business.controller;
 
 
 import com.catering.manager.api.business.common.criteria.UnitCriteria;
-import com.catering.manager.api.business.payload.SubCategoryPayload;
 import com.catering.manager.api.business.payload.UnitPayload;
 import com.catering.manager.api.business.payload.global.GlobalPayload;
 import com.catering.manager.api.business.service.inter.IUnitService;
@@ -12,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.catering.manager.api.business.common.util.BusinessConstants.UNIT_CONTROLLER;
 import static com.catering.manager.api.common.constant.CommonConstants.*;
@@ -62,7 +63,7 @@ public class UnitController {
     }
 
     @GetMapping(path = FIND_ALL_EP, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GlobalPayload<UnitPayload>> findAllByBlogPostId() {
+    public ResponseEntity<List<UnitPayload>> findAllByBlogPostId() {
         return new ResponseEntity(service.findAll(), HttpStatus.OK);
     }
 

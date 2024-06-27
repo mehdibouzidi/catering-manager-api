@@ -5,6 +5,8 @@ import com.catering.manager.api.business.model.SubCategoryEntity;
 import com.catering.manager.api.business.payload.SubCategoryPayload;
 import com.catering.manager.api.business.payload.global.GlobalPayload;
 
+import java.util.List;
+
 public interface ISubCategoryService {
 
     SubCategoryPayload save(SubCategoryPayload payload);
@@ -14,7 +16,7 @@ public interface ISubCategoryService {
     SubCategoryEntity getEntity(Integer id);
     SubCategoryPayload update(SubCategoryPayload payload);
 
-    GlobalPayload<SubCategoryPayload> findAll();
+    List<SubCategoryPayload> findAll();
 
     GlobalPayload<SubCategoryPayload> findAllByCriteria(SubCategoryCriteria criteria);
 }

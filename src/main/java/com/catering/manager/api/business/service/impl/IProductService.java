@@ -100,10 +100,8 @@ public class IProductService implements com.catering.manager.api.business.servic
     }
 
     @Override
-    public GlobalPayload<ProductPayload> findAll() {
-        GlobalPayload<ProductPayload> globalPayload = new GlobalPayload<>();
-        globalPayload.setElements(mapper.entityListToPayload(repository.findAll()));
-        return globalPayload;
+    public List<ProductPayload> findAll() {
+        return mapper.entityListToPayload(repository.findAll());
     }
 
 }
