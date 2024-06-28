@@ -14,9 +14,9 @@ public class ProductCriteria extends PaginationCriteria {
     private Integer id;
     private String code;
     private String name;
-    private Integer subCategoryId;
-    private Integer unitId;
-    private Integer typeId;
+    private String subCategoryName;
+    private String unitName;
+    private String typeName;
 
     public Map<String, String> toMap(){
         Map<String, String> columnsValues = new HashMap<>();
@@ -29,15 +29,15 @@ public class ProductCriteria extends PaginationCriteria {
         if(Objects.nonNull(name)){
             columnsValues.put("name",name);
         }
-        if(Objects.nonNull(subCategoryId)){
-            columnsValues.put("subCategory.id",subCategoryId.toString());
+        if(Objects.nonNull(subCategoryName)){
+            columnsValues.put("subCategory.name", subCategoryName);
         }
 
-        if(Objects.nonNull(unitId)){
-            columnsValues.put("unit.id", unitId.toString());
+        if(Objects.nonNull(unitName)){
+            columnsValues.put("unit.name", unitName);
         }
-        if(Objects.nonNull(typeId)){
-            columnsValues.put("type.id", typeId.toString());
+        if(Objects.nonNull(typeName)){
+            columnsValues.put("type.name", typeName);
         }
         return columnsValues;
     }
